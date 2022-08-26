@@ -14,6 +14,7 @@ app.use(express.json());
 app.post('/login', loginController);
 app.post('/user', userMiddleware, userController.create);
 app.get('/user', authToken, userController.getAll);
+app.get('/user/:id', authToken, userController.getById);
 app.use(errorMiddleware);
 // ...
 
