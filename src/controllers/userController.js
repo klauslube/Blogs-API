@@ -1,10 +1,15 @@
-// const { User } = require('../database/models');
-// const userService = require('../services/userService');
+const userService = require('../services/user.service');
+const { createToken } = require('../helper/createToken');
 
-// const userController = {
-//   create: async (req, res) => {
-//     const { displayName, email, password, image } = req.body;
-//   },
-// };
+const userController = {
+  create: async (req, res) => {
+    const { displayName, email, password, image } = req.body;
 
-// module.exports = userController;
+    await userService.create({ displayName, email, password, image });
+    const token = createToken(email);
+    console.log(token);
+    return res.status(201).json({ token });
+  },
+};
+
+module.exports = userController;

@@ -9,6 +9,4 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-// app.post('/user', userValidation, userController.create);
-
 app.listen(port, () => console.log('ouvindo porta', port));
