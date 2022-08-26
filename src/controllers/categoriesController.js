@@ -9,6 +9,11 @@ const categoriesController = {
 
     return res.status(201).json(category);
   },
+
+  getAll: async (req, res) => {
+    const category = await categoryService.getAll();
+    return res.status(200).json(category);
+  },
 };
 
 module.exports = categoriesController;

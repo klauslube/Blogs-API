@@ -9,6 +9,11 @@ const categoryService = {
     
     return newCategory;
   },
+  getAll: async () => {
+    const allCategory = await Category.findAll();
+    
+    return allCategory;
+  },
 };
 
 module.exports = categoryService;

@@ -17,6 +17,7 @@ app.post('/user', userMiddleware, userController.create);
 app.get('/user', authToken, userController.getAll);
 app.get('/user/:id', authToken, userController.getById);
 app.post('/categories', authToken, categoriesController.create);
+app.get('/categories', authToken, categoriesController.getAll);
 app.use(errorMiddleware);
 // ...
 
