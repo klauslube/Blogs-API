@@ -1,7 +1,7 @@
 const express = require('express');
 const { loginController } = require('./controllers/loginController');
 const errorMiddleware = require('./middlewares/errorMiddleware');
-// require('express-async-errors');
+require('express-async-errors');
 // ...
 
 const app = express();

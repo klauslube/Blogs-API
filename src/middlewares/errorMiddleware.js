@@ -1,8 +1,7 @@
-const errorMiddleware = (err, _req, res, _next) => res.status(err.status || 500).json({
-  error: {
-    code: err.code || 'undefinedError',
+const errorMiddleware = (err, _req, res, _next) => {
+  console.log(err);
+  res.status(err.status || 500).json({
     message: err.message,
-  },
-});
-
+  });
+};
 module.exports = errorMiddleware;

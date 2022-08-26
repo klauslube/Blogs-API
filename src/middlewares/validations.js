@@ -35,9 +35,9 @@ const userSchema = joi.object({
     'any.required': '400|"password" is required',
     'string.min': '400|"password" length must be at least 6 characters long', 
   }),
-  email: joi.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).required().messages({
+  email: joi.string().pattern(new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)).required().messages({
     'any.required': '400|"name" is required',
-    'string.min': '400|"email" must be a valid email', 
+    'string.pattern': '400|"email" must be a valid email', 
   }),
 });
 
