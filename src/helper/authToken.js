@@ -11,7 +11,8 @@ const authToken = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
+    req.email = decoded;
+    // console.log(decoded);
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });
   }
