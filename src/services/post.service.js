@@ -1,4 +1,4 @@
-const { BlogPost, sequelize, PostCategory, User } = require('../database/models');
+const { BlogPost, sequelize, PostCategory, User, Category } = require('../database/models');
 const CustomError = require('../middlewares/CustomError');
 // const jwt = require('jsonwebtoken');
 
@@ -29,6 +29,16 @@ const postService = {
       return newPost;
     });
     return result;
+  },
+
+  getAll: async () => {
+    const allPost = await BlogPost.findAll(
+      { include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+       { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    },
+);
+    return allPost;
   },
 };
 
