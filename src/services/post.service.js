@@ -15,16 +15,18 @@ const postService = {
     if (!title || !content || !categoryIds) {
       throw new CustomError(400, 'Some required fields are missing');
     }
+
     const userId = await postService.getUser(user);
     
     const result = await sequelize.transaction(async (t) => {
       const newPost = await BlogPost.create({ title, content, userId }, { transaction: t });
-      // const { id: postId } = newPost;
+      // console.log(newPost);
+      const { id: postId } = newPost;
       const categories = categoryIds
-      .map((catId) => ({ categoryId: catId, postId: newPost.dataValues.id }));
-     const arrPost = await PostCategory.bulkCreate(categories, { transaction: t });
+      .map((catId) => ({ categoryId: catId, postId }));
+     await PostCategory.bulkCreate(categories, { transaction: t });
     
-      return arrPost;
+      return newPost;
     });
     return result;
   },

@@ -6,6 +6,7 @@ const userController = require('./controllers/userController');
 const categoriesController = require('./controllers/categoriesController');
 const postController = require('./controllers/postController');
 const { authToken } = require('./helper/authToken');
+// const { categoryValidation } = require('./middlewares/categoryValidation');
 require('express-async-errors');
 // ...
 
