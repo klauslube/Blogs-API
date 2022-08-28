@@ -26,6 +26,12 @@ const postController = {
     const allPosts = await postService.getAll();
     return res.status(200).json(allPosts);
   },
+
+  getById: async (req, res) => {
+    const { id } = req.params;
+    const postById = await postService.getById(id);
+    return res.status(200).json(postById);
+  },
 };
 
 module.exports = postController;

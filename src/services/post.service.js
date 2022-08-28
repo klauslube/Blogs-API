@@ -37,8 +37,18 @@ const postService = {
        { model: Category, as: 'categories', through: { attributes: [] } },
       ],
     },
-);
+  );
     return allPost;
+  },
+
+  getById: async (id) => {
+    const postById = await BlogPost.findOne({ where: { id },
+      include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+    { model: Category, as: 'categories', through: { attributes: [] } },
+   ],
+ });
+    if (!postById) throw new CustomError(404, 'Post does not exist');
+    return postById;
   },
 };
 
