@@ -25,7 +25,6 @@ const postService = {
     
     const result = await sequelize.transaction(async (t) => {
       const newPost = await BlogPost.create({ title, content, userId }, { transaction: t });
-      // console.log(newPost);
       const { id: postId } = newPost;
       const categories = categoryIds
       .map((catId) => ({ categoryId: catId, postId }));
@@ -55,13 +54,26 @@ const postService = {
     return postById;
   },
 
-  // update: async (id, {title, content}) => {
-  //   const updatedPost = await BlogPost.findOne({ where: { id },
-  //     include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
-  //   { model: Category, as: 'categories', through: { attributes: [] } },
-  //   ] });
-  //   return updatedPost;
-  // },
+  update: async (id, { title, content, user }) => {
+    if (!title || !content) throw new CustomError(400, 'Some required fields are missing');
+    
+    const userId = await postService.getUser(user);
+    const postId = await postService.getById(id);
+    
+    if (postId.userId !== userId) throw new CustomError(401, 'Unauthorized user');
+    const updatedPost = await BlogPost.update({ title, content }, { where: { id } });
+
+    return updatedPost; 
+  },
+
+  delete: async (id, { user }) => {
+    const userId = await postService.getUser(user);
+    // console.log(userId);
+    const postId = await postService.getById(id);
+    if (postId.userId !== userId) throw new CustomError(401, 'Unauthorized user');
+
+    // await BlogPost.destroy({ where: { id } });
+  },
 };
 
 module.exports = postService;

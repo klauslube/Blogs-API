@@ -24,9 +24,17 @@ const postController = {
 
   update: async (req, res) => {
     const { id } = req.params;
+    const { user } = req.email;
     const { title, content } = req.body;
-    const updatePost = await postService.update(id, { title, content });
+    const updatePost = await postService.update(id, { title, content, user });
     return res.status(200).json(updatePost);
+  },
+
+  delete: async (req, res) => {
+    const { id } = req.params;
+    const { user } = req.email;
+    await postService.delete(id, { user });
+    return res.status(204).end();
   },
 };
 
