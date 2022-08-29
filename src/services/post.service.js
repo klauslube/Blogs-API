@@ -8,7 +8,6 @@ const postService = {
 
   getUser: async (email) => {
     const userId = await User.findOne({ where: { email } });
-    // console.log(userId);
     const { id } = userId;
     return id;
   },
@@ -30,7 +29,7 @@ const postService = {
       const { id: postId } = newPost;
       const categories = categoryIds
       .map((catId) => ({ categoryId: catId, postId }));
-     await PostCategory.bulkCreate(categories, { transaction: t });
+    await PostCategory.bulkCreate(categories, { transaction: t });
     
       return newPost;
     });
