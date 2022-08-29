@@ -16,6 +16,11 @@ const postService = {
       throw new CustomError(400, 'Some required fields are missing');
     }
 
+    const checkCategory = await Category.findAll({ raw: true });
+    const allCatIds = checkCategory.flatMap((i) => Object.values(i));
+    const checkValues = allCatIds.some((e) => categoryIds.includes(e));
+    if (!checkValues) throw new CustomError(400, '"categoryIds" not found');
+
     const userId = await postService.getUser(user);
     
     const result = await sequelize.transaction(async (t) => {
@@ -45,11 +50,18 @@ const postService = {
     const postById = await BlogPost.findOne({ where: { id },
       include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
     { model: Category, as: 'categories', through: { attributes: [] } },
-   ],
- });
+    ] });
     if (!postById) throw new CustomError(404, 'Post does not exist');
     return postById;
   },
+
+  // update: async (id, {title, content}) => {
+  //   const updatedPost = await BlogPost.findOne({ where: { id },
+  //     include: [{ model: User, as: 'user', attributes: { exclude: ['password'] } },
+  //   { model: Category, as: 'categories', through: { attributes: [] } },
+  //   ] });
+  //   return updatedPost;
+  // },
 };
 
 module.exports = postService;
