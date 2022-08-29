@@ -61,9 +61,10 @@ const postService = {
     const postId = await postService.getById(id);
     
     if (postId.userId !== userId) throw new CustomError(401, 'Unauthorized user');
-    const updatedPost = await BlogPost.update({ title, content }, { where: { id } });
+    await BlogPost.update({ title, content }, { where: { id } });
+    const newText = await postService.getById(id);
 
-    return updatedPost; 
+    return newText; 
   },
 
   delete: async (id, { user }) => {
@@ -72,8 +73,7 @@ const postService = {
     const postId = await postService.getById(id);
     if (postId.userId !== userId) throw new CustomError(401, 'Unauthorized user');
 
-    // const deletePost = await BlogPost.destroy({ where: { id } });
-    // return deletePost;
+    await BlogPost.destroy({ where: { id } });
   },
 };
 

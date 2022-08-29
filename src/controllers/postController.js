@@ -6,8 +6,13 @@ const postController = {
     const { title, content, categoryIds } = req.body;
     const { user } = req.email;
 
-    const newPost = await postService.create({ title, content, categoryIds, user });
-    
+    const newPost = await postService.create({
+      title,
+      content,
+      categoryIds,
+      user,
+    });
+
     return res.status(201).json(newPost);
   },
 
