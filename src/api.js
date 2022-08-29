@@ -23,6 +23,7 @@ app.get('/user/:id', authToken, userController.getById);
 app.post('/categories', authToken, categoriesController.create);
 app.get('/categories', authToken, categoriesController.getAll);
 
+app.get('/post/search', authToken, postController.search);
 app.post('/post', authToken, postController.create);
 app.get('/post', authToken, postController.getAll);
 app.get('/post/:id', authToken, postController.getById);

@@ -1,6 +1,8 @@
+const sequelizeParam = require('sequelize');
 const { BlogPost, sequelize, PostCategory, User, Category } = require('../database/models');
 const CustomError = require('../middlewares/CustomError');
-// const jwt = require('jsonwebtoken');
+
+const { Op } = sequelizeParam;
 
 const postService = {
 
@@ -74,6 +76,25 @@ const postService = {
     if (postId.userId !== userId) throw new CustomError(401, 'Unauthorized user');
 
     await BlogPost.destroy({ where: { id } });
+  },
+
+  search: async (query) => {
+    const searchPost = await BlogPost.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${query}%` } },
+          { content: { [Op.like]: `%${query}%` } },
+        ],
+      },
+      include: [
+        { model: User, as: 'user', attributes: { exclude: ['password'] } }, 
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
+    
+    if (!searchPost) return [];
+
+    return searchPost;
   },
 };
 
