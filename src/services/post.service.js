@@ -72,7 +72,8 @@ const postService = {
     const postId = await postService.getById(id);
     if (postId.userId !== userId) throw new CustomError(401, 'Unauthorized user');
 
-    // await BlogPost.destroy({ where: { id } });
+    // const deletePost = await BlogPost.destroy({ where: { id } });
+    // return deletePost;
   },
 };
 

@@ -29,6 +29,8 @@ app.get('/post/:id', authToken, postController.getById);
 app.put('/post/:id', authToken, postController.update);
 app.delete('/post/:id', authToken, postController.delete);
 
+app.delete('/user/me', authToken, userController.delete);
+
 app.use(errorMiddleware);
 // ...
 
