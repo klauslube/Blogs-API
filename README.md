@@ -24,7 +24,7 @@ Esse projeto é uma API RESTfull na qual simula um site de Blog, nele é possive
 # Instruções da aplicação
 ### Instalar dependências
 ```
-cd store-manager-project
+cd blogs-API
 npm install
 ```
 ### Rodar aplicação sem Docker
@@ -33,7 +33,7 @@ Crie um arquivo `.env` com sua conexão ao MySQL.
 
 
 ```
-cd store-manager-project
+cd blogs-API
 npm run debug
 ```
 
