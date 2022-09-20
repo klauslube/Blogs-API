@@ -41,7 +41,7 @@ npm run debug
 ```
 cd blogs-API
 docker-compose up -d
-docker exec -it blogs-API bash
+docker exec -it blogs_api bash
 npm install
 npm run prestart
 npm run seed
