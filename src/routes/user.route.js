@@ -10,5 +10,4 @@ route.get('/user', authToken, userController.getAll);
 route.get('/user/:id', authToken, userController.getById);
 route.delete('/user/me', authToken, userController.delete);
 
-
-export default route;
+module.exports = route;

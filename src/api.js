@@ -5,7 +5,8 @@ require('express-async-errors');
 const loginRoute = require('./routes/login.route');
 const userRoute = require('./routes/user.route');
 const categoriesRoute = require('./routes/categories.route');
-const postRoute = require('./routes/post.route')
+const postRoute = require('./routes/post.route');
+
 const app = express();
 
 app.use(express.json());

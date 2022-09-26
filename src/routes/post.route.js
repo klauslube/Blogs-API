@@ -11,4 +11,4 @@ route.get('/post/:id', authToken, postController.getById);
 route.put('/post/:id', authToken, postController.update);
 route.delete('/post/:id', authToken, postController.delete);
 
-export default route;
+module.exports = route;

@@ -7,4 +7,4 @@ const route = express.Router();
 route.post('/categories', authToken, categoriesController.create);
 route.get('/categories', authToken, categoriesController.getAll);
 
-export default route;
+module.exports = route;
